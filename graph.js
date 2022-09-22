@@ -95,7 +95,31 @@ class Graph {
   }
 
   /** find the distance of the shortest path from the start vertex to the end vertex */
-  distanceOfShortestPath(start, end) { }
+  distanceOfShortestPath(start, end) { 
+    //at start, check if any adjacents are end if so done and distance is 1
+    //if not, move into neighbor;
+    //check if neighbors have end if so done and distance is 2
+    //if not check next neighbor
+    
+    //need to keep track of vertexs we have visited 
+    let toVisitQueue = [start];
+    let seen = new Set(toVisitQueue);
+    let distance = 1;
+    
+    while (toVisitQueue.length > 0) {
+      let current = toVisitQueue.shift();
+      if (current === end) return distance;
+      
+      for (let neighbor of current.adjacent) {
+        if (!seen.has(neighbor)) {
+          toVisitQueue.push(neighbor);
+          seen.add(neighbor);
+        }
+      }
+    }
+    
+    return nodeValues;
+  }
 }
 
 module.exports = { Graph, Node }
